@@ -4,4 +4,4 @@
 
 **_Free video conferencing solutions_**
 
-Go ahead, video chat with the whole team. In fact, invite everyone you know. Jitsi Meet is a fully encrypted, 100% open source video conferencing solution that you can use all day, every day, for free — with no account needed.
+Jitsi Meet is an open source JavaScript WebRTC application used primarily for video conferencing. In addition to audio and video, screen sharing is available, and new members can be invited via a generated link. The interface is accessible via web browser or with a mobile app. The Jitsi Meet server software can be downloaded and installed on Linux-based computers. Jitsi owner 8x8 maintains a free public-use server for up to 100 participants at meet.jit.si.
