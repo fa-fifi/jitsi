@@ -18,9 +18,12 @@ class Jitsi extends StatelessWidget {
       title: 'Jitsi',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.grey,
-              brightness: MediaQuery.platformBrightnessOf(context))),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.grey,
+            brightness: MediaQuery.platformBrightnessOf(context)),
+        listTileTheme: const ListTileThemeData(
+            contentPadding: EdgeInsets.symmetric(horizontal: 5)),
+      ),
       home: const HomeScreen());
 }
