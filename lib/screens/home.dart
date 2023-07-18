@@ -18,17 +18,9 @@ class _HomeScreenState extends State<HomeScreen> {
           TextEditingController(text: "jitsi-meet-test-room"),
       subjectController = TextEditingController(text: "Test Meeting"),
       usernameController = TextEditingController(text: "Test User"),
-      emailController = TextEditingController(text: "fake@email.com"),
-      avatarController = TextEditingController();
+      emailController = TextEditingController(text: "fake@email.com");
   Server server = Server.public;
   bool isAudioMuted = true, isAudioOnly = false, isVideoMuted = true;
-
-  SwitchListTile buildSwitchTile(BuildContext context,
-          {required String label, required bool value}) =>
-      SwitchListTile.adaptive(
-          title: Text(label, style: Theme.of(context).textTheme.bodyMedium),
-          value: value,
-          onChanged: (value) => setState(() => isVideoMuted = value));
 
   void _joinMeeting() async {
     final String token = await JwtService.rs256(
@@ -44,6 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
         isVideoMuted: isVideoMuted,
         userDisplayName: usernameController.text,
         userEmail: emailController.text,
+        userAvatarUrl:
+            'https://api.dicebear.com/6.x/notionists/png?seed=${usernameController.text}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf',
         featureFlags: {});
 
     debugPrint("JitsiMeetingOptions: $options");
@@ -138,15 +132,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       maxLength: 20),
                   CustomTextField(
                       labelText: "User Email", controller: emailController),
-                  CustomTextField(
-                      labelText: "User Avatar URL",
-                      controller: avatarController),
-                  buildSwitchTile(context,
-                      label: "Audio Muted", value: isAudioMuted),
-                  buildSwitchTile(context,
-                      label: "Audio Only", value: isAudioOnly),
-                  buildSwitchTile(context,
-                      label: "Video Muted", value: isVideoMuted),
+                  SwitchListTile.adaptive(
+                      title: Text("Audio Muted",
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      value: isAudioMuted,
+                      onChanged: (value) =>
+                          setState(() => isAudioMuted = value)),
+                  SwitchListTile.adaptive(
+                      title: Text("Audio Only",
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      value: isAudioOnly,
+                      onChanged: (value) =>
+                          setState(() => isAudioOnly = value)),
+                  SwitchListTile.adaptive(
+                      title: Text("Video Muted",
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      value: isVideoMuted,
+                      onChanged: (value) =>
+                          setState(() => isVideoMuted = value)),
+                  const SizedBox(height: 10),
                   FlatButton(label: 'Join', onPressed: _joinMeeting),
                 ]),
           ),
