@@ -7,8 +7,7 @@ class JwtService {
 // RSA SHA-256 algorithm
   static Future<String> rs256(
       {required String name, required String email}) async {
-    final String pem =
-        await rootBundle.loadString('assets/jitsi_private_key.pk');
+    final String pem = await rootBundle.loadString('assets/jaasauth.pk');
 
     final JWT jwt = JWT({
       "aud": "jitsi",
