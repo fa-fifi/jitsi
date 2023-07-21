@@ -14,19 +14,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController roomController =
-          TextEditingController(text: "jitsi-meet-test-room"),
-      subjectController = TextEditingController(text: "Test Meeting"),
-      usernameController = TextEditingController(text: "Test User"),
-      emailController = TextEditingController(text: "fake@email.com");
+  final roomController = TextEditingController(text: "jitsi-meet-test-room");
+  final subjectController = TextEditingController(text: "Test Meeting");
+  final usernameController = TextEditingController(text: "Test User");
+  final emailController = TextEditingController(text: "fake@email.com");
+  bool isAudioMuted = true;
+  bool isAudioOnly = false;
+  bool isVideoMuted = true;
   Server server = Server.public;
-  bool isAudioMuted = true, isAudioOnly = false, isVideoMuted = true;
 
-  void _joinMeeting() async {
-    final String token = await JwtService.rs256(
+  void joinMeeting() async {
+    final token = await JwtService.rs256(
         name: usernameController.text, email: emailController.text);
 
-    final JitsiMeetingOptions options = JitsiMeetingOptions(
+    final options = JitsiMeetingOptions(
         roomNameOrUrl: "$jitsiAppID/${roomController.text}",
         serverUrl: server.url,
         subject: subjectController.text,
@@ -151,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onChanged: (value) =>
                           setState(() => isVideoMuted = value)),
                   const SizedBox(height: 10),
-                  FlatButton(label: 'Join', onPressed: _joinMeeting),
+                  FlatButton(label: 'Join', onPressed: joinMeeting),
                 ]),
           ),
         ),

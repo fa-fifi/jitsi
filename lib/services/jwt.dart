@@ -7,9 +7,9 @@ class JwtService {
 // RSA SHA-256 algorithm
   static Future<String> rs256(
       {required String name, required String email}) async {
-    final String pem = await rootBundle.loadString('assets/jaasauth.pk');
+    final pem = await rootBundle.loadString('assets/jaasauth.pk');
 
-    final JWT jwt = JWT({
+    final jwt = JWT({
       "aud": "jitsi",
       "iss": "chat",
       "sub": jitsiAppID,
@@ -37,7 +37,7 @@ class JwtService {
       "alg": "RS256",
     });
 
-    final String token = jwt.sign(RSAPrivateKey(pem),
+    final token = jwt.sign(RSAPrivateKey(pem),
         algorithm: JWTAlgorithm.RS256, expiresIn: const Duration(days: 1));
 
     debugPrint('Signed token: $token\n');
