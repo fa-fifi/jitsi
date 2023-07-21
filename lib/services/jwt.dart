@@ -10,31 +10,31 @@ class JwtService {
     final pem = await rootBundle.loadString('assets/jaasauth.pk');
 
     final jwt = JWT({
-      "aud": "jitsi",
-      "iss": "chat",
-      "sub": jitsiAppID,
-      "context": {
-        "features": {
-          "livestreaming": true,
-          "outbound-call": true,
-          "sip-outbound-call": false,
-          "transcription": true,
-          "recording": true,
+      'aud': 'jitsi',
+      'iss': 'chat',
+      'sub': jitsiAppID,
+      'context': {
+        'features': {
+          'livestreaming': true,
+          'outbound-call': true,
+          'sip-outbound-call': false,
+          'transcription': true,
+          'recording': true,
         },
-        "user": {
-          "hidden-from-recorder": false,
-          "moderator": false,
-          "name": name,
-          "id": "google-oauth2|105725062313043518546",
-          "avatar": "",
-          "email": email,
+        'user': {
+          'hidden-from-recorder': false,
+          'moderator': false,
+          'name': name,
+          'id': 'google-oauth2|105725062313043518546',
+          'avatar': '',
+          'email': email,
         }
       },
-      "room": "*"
+      'room': '*'
     }, header: {
-      "kid": "$jitsiAppID/$jitsiKeyID",
-      "typ": "JWT",
-      "alg": "RS256",
+      'kid': '$jitsiAppID/$jitsiKeyID',
+      'typ': 'JWT',
+      'alg': 'RS256',
     });
 
     final token = jwt.sign(RSAPrivateKey(pem),

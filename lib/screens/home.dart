@@ -14,10 +14,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final roomController = TextEditingController(text: "jitsi-meet-test-room");
-  final subjectController = TextEditingController(text: "Test Meeting");
-  final usernameController = TextEditingController(text: "Test User");
-  final emailController = TextEditingController(text: "fake@email.com");
+  final roomController = TextEditingController(text: 'jitsi-meet-test-room');
+  final subjectController = TextEditingController(text: 'Test Meeting');
+  final usernameController = TextEditingController(text: 'Test User');
+  final emailController = TextEditingController(text: 'fake@email.com');
   bool isAudioMuted = true;
   bool isAudioOnly = false;
   bool isVideoMuted = true;
@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         name: usernameController.text, email: emailController.text);
 
     final options = JitsiMeetingOptions(
-        roomNameOrUrl: "$jitsiAppID/${roomController.text}",
+        roomNameOrUrl: '$jitsiAppID/${roomController.text}',
         serverUrl: server.url,
         subject: subjectController.text,
         token: server.isTokenNeeded ? token : null,
@@ -41,38 +41,38 @@ class _HomeScreenState extends State<HomeScreen> {
             'https://api.dicebear.com/6.x/notionists/png?seed=${usernameController.text}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf',
         featureFlags: {});
 
-    debugPrint("JitsiMeetingOptions: $options");
+    debugPrint('JitsiMeetingOptions: $options');
 
     await JitsiMeetWrapper.joinMeeting(
       options: options,
       listener: JitsiMeetingListener(
-        onOpened: () => debugPrint("onOpened"),
+        onOpened: () => debugPrint('onOpened'),
         onConferenceWillJoin: (url) =>
-            debugPrint("onConferenceWillJoin: url: $url"),
+            debugPrint('onConferenceWillJoin: url: $url'),
         onConferenceJoined: (url) =>
-            debugPrint("onConferenceJoined: url: $url"),
+            debugPrint('onConferenceJoined: url: $url'),
         onConferenceTerminated: (url, error) =>
-            debugPrint("onConferenceTerminated: url: $url, error: $error"),
+            debugPrint('onConferenceTerminated: url: $url, error: $error'),
         onAudioMutedChanged: (isMuted) =>
-            debugPrint("onAudioMutedChanged: isMuted: $isMuted"),
+            debugPrint('onAudioMutedChanged: isMuted: $isMuted'),
         onVideoMutedChanged: (isMuted) =>
-            debugPrint("onVideoMutedChanged: isMuted: $isMuted"),
+            debugPrint('onVideoMutedChanged: isMuted: $isMuted'),
         onScreenShareToggled: (participantId, isSharing) =>
-            debugPrint("onScreenShareToggled: participantId: $participantId, "
-                "isSharing: $isSharing"),
+            debugPrint('onScreenShareToggled: participantId: $participantId, '
+                'isSharing: $isSharing'),
         onParticipantJoined: (email, name, role, participantId) => debugPrint(
-            "onParticipantJoined: email: $email, name: $name, role: $role, "
-            "participantId: $participantId"),
+            'onParticipantJoined: email: $email, name: $name, role: $role, '
+            'participantId: $participantId'),
         onParticipantLeft: (participantId) =>
-            debugPrint("onParticipantLeft: participantId: $participantId"),
+            debugPrint('onParticipantLeft: participantId: $participantId'),
         onParticipantsInfoRetrieved: (participantsInfo, requestId) => debugPrint(
-            "onParticipantsInfoRetrieved: participantsInfo: $participantsInfo, "
-            "requestId: $requestId"),
+            'onParticipantsInfoRetrieved: participantsInfo: $participantsInfo, '
+            'requestId: $requestId'),
         onChatMessageReceived: (senderId, message, isPrivate) => debugPrint(
-            "onChatMessageReceived: senderId: $senderId, message: $message, "
-            "isPrivate: $isPrivate"),
-        onChatToggled: (isOpen) => debugPrint("onChatToggled: isOpen: $isOpen"),
-        onClosed: () => debugPrint("onClosed"),
+            'onChatMessageReceived: senderId: $senderId, message: $message, '
+            'isPrivate: $isPrivate'),
+        onChatToggled: (isOpen) => debugPrint('onChatToggled: isOpen: $isOpen'),
+        onClosed: () => debugPrint('onClosed'),
       ),
     );
   }
@@ -120,33 +120,33 @@ class _HomeScreenState extends State<HomeScreen> {
                           setState(() => server = newServer!)),
                   const SizedBox(height: 10),
                   CustomTextField(
-                      labelText: "Room",
+                      labelText: 'Room',
                       controller: roomController,
                       maxLength: 20),
                   CustomTextField(
-                      labelText: "Subject",
+                      labelText: 'Subject',
                       controller: subjectController,
                       maxLength: 20),
                   CustomTextField(
-                      labelText: "User Display Name",
+                      labelText: 'User Display Name',
                       controller: usernameController,
                       maxLength: 20),
                   CustomTextField(
-                      labelText: "User Email", controller: emailController),
+                      labelText: 'User Email', controller: emailController),
                   SwitchListTile.adaptive(
-                      title: Text("Audio Muted",
+                      title: Text('Audio Muted',
                           style: Theme.of(context).textTheme.bodyMedium),
                       value: isAudioMuted,
                       onChanged: (value) =>
                           setState(() => isAudioMuted = value)),
                   SwitchListTile.adaptive(
-                      title: Text("Audio Only",
+                      title: Text('Audio Only',
                           style: Theme.of(context).textTheme.bodyMedium),
                       value: isAudioOnly,
                       onChanged: (value) =>
                           setState(() => isAudioOnly = value)),
                   SwitchListTile.adaptive(
-                      title: Text("Video Muted",
+                      title: Text('Video Muted',
                           style: Theme.of(context).textTheme.bodyMedium),
                       value: isVideoMuted,
                       onChanged: (value) =>
