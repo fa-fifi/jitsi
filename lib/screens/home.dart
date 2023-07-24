@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final subjectController = TextEditingController(text: 'Test Meeting');
   final usernameController = TextEditingController(text: 'Test User');
   final emailController = TextEditingController(text: 'fake@email.com');
+  bool isAutoJoin = false;
   bool isAudioMuted = true;
   bool isAudioOnly = false;
   bool isVideoMuted = true;
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         userEmail: emailController.text,
         userAvatarUrl:
             'https://api.dicebear.com/6.x/notionists/png?seed=${usernameController.text}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf',
-        featureFlags: {});
+        featureFlags: {'prejoinpage.enabled': !isAutoJoin});
 
     debugPrint('JitsiMeetingOptions: $options');
 
@@ -133,6 +134,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       maxLength: 20),
                   CustomTextField(
                       labelText: 'User Email', controller: emailController),
+                  SwitchListTile.adaptive(
+                      title: Text('Auto Join',
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      value: isAutoJoin,
+                      onChanged: (value) => setState(() => isAutoJoin = value)),
                   SwitchListTile.adaptive(
                       title: Text('Audio Muted',
                           style: Theme.of(context).textTheme.bodyMedium),
